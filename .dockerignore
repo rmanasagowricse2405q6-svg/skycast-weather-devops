@@ -1,1 +1,13 @@
-__pycache__/\n.pytest_cache/\n.venv/\n.git/\n*.py[cod]\n.env\ntests/\nREADME.md\n
+
+.venv/
+venv/
+__pycache__/
+*.py[cod]
+.pytest_cache/
+.git/
+.gitignore
+.vscode/
+.idea/
+.env
+.env.*
+*.log
