@@ -58,3 +58,4 @@ The pipeline tags the image with the Jenkins build number and `latest`, replaces
 Weather data is provided by Open-Meteo. Review current terms and attribution rules before commercial use.
 
 ## GitHub Webhook CI/CD Test
+Automatic Jenkins CI/CD testing
