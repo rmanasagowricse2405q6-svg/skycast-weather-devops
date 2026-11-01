@@ -56,3 +56,5 @@ A GitHub webhook requires Jenkins to be reachable from GitHub. A localhost-only 
 The pipeline tags the image with the Jenkins build number and `latest`, replaces the local container, and checks `/health`. It does not push to a registry or publish the application publicly.
 
 Weather data is provided by Open-Meteo. Review current terms and attribution rules before commercial use.
+
+## GitHub Webhook CI/CD Test
