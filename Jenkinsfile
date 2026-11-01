@@ -9,6 +9,7 @@ pipeline {
 
     environment {
         PYTHON_EXE = 'C:\\Users\\manas\\AppData\\Local\\Programs\\Python\\Python314\\python.exe'
+        DOCKER_EXE = 'C:\\Users\\manas\\AppData\\Local\\Programs\\DockerDesktop\\resources\\bin\\docker.exe'
         IMAGE_NAME = 'skycast-weather'
         CONTAINER_NAME = 'skycast-weather'
         HOST_PORT = '5000'
@@ -25,8 +26,8 @@ pipeline {
             steps {
                 bat '"%PYTHON_EXE%" --version'
                 bat 'git --version'
-                bat 'docker --version'
-                bat 'docker info'
+                bat '"%DOCKER_EXE%" --version'
+                bat '"%DOCKER_EXE%" info'
             }
         }
 
@@ -53,8 +54,8 @@ pipeline {
 
         stage('Build Image') {
             steps {
-                bat 'docker build -t %IMAGE_NAME%:%BUILD_NUMBER% .'
-                bat 'docker tag %IMAGE_NAME%:%BUILD_NUMBER% %IMAGE_NAME%:latest'
+                bat '"%DOCKER_EXE%" build -t %IMAGE_NAME%:%BUILD_NUMBER% .'
+                bat '"%DOCKER_EXE%" tag %IMAGE_NAME%:%BUILD_NUMBER% %IMAGE_NAME%:latest'
             }
         }
 
@@ -62,8 +63,8 @@ pipeline {
             steps {
                 bat '''
                 @echo off
-                docker rm -f %CONTAINER_NAME% >NUL 2>&1
-                docker run -d --name %CONTAINER_NAME% --restart unless-stopped -p %HOST_PORT%:5000 %IMAGE_NAME%:%BUILD_NUMBER%
+                "%DOCKER_EXE%" rm -f %CONTAINER_NAME% >NUL 2>&1
+                "%DOCKER_EXE%" run -d --name %CONTAINER_NAME% --restart unless-stopped -p %HOST_PORT%:5000 %IMAGE_NAME%:%BUILD_NUMBER%
                 if errorlevel 1 exit /b 1
                 '''
             }
